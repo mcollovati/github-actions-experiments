@@ -6,6 +6,7 @@ name: Publish Maven Package
 on:
   release:
     types: [ edited ]
+  workflow_dispatch:
 
 jobs:
   build:
