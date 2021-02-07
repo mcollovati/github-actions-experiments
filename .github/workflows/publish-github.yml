@@ -5,7 +5,7 @@ name: Publish Maven Package
 
 on:
   release:
-    types: [created,edited]
+    types: [edited]
 
 jobs:
   build:
