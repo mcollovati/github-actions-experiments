@@ -205,6 +205,22 @@
         </profile>
 
         <profile>
+            <id>github</id>
+            <activation>
+                <property>
+                    <name>prjKey.distrib</name>
+                    <value>github</value>
+                </property>
+            </activation>
+            <distributionManagement>
+                <repository>
+                    <id>github</id>
+                    <name>GitHub Packages</name>
+                    <url>https://maven.pkg.github.com/octocat/hello-world</url>
+                </repository>
+            </distributionManagement>
+        </profile>
+        <profile>
             <id>jfrog</id>
             <activation>
                 <property>
