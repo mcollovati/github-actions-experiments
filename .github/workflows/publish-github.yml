@@ -5,7 +5,7 @@ name: Publish Maven Package
 
 on:
   release:
-    types: [ edited ]
+    types: [ created, edited , published, released ]
   workflow_dispatch:
 
 jobs:
@@ -19,16 +19,15 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 1.8
-          server-id: github # Value of the distributionManagement/repository/id field of the pom.xml
-          #settings-path: ${{ github.workspace }} # location for the settings.xml file
+      #          server-id: github # Value of the distributionManagement/repository/id field of the pom.xml
 
       - name: Build with Maven
         run: mvn -B package --file pom.xml
 
-      - name: Publish to GitHub Packages Apache Maven
-        run: mvn deploy -DprjKey.distrib=github
-        env:
-          GITHUB_TOKEN: ${{ secrets.PAT }}
+      #      - name: Publish to GitHub Packages Apache Maven
+      #        run: mvn deploy -DprjKey.distrib=github
+      #        env:
+      #          GITHUB_TOKEN: ${{ secrets.PAT }}
 
       - name: Set up JFrog
         uses: actions/setup-java@v1
