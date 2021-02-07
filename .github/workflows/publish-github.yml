@@ -28,7 +28,7 @@ jobs:
       - name: Publish to GitHub Packages Apache Maven
         run: mvn deploy -s $GITHUB_WORKSPACE/settings.xml
         env:
-          GITHUB_TOKEN: ${{ secrest.PAT }}
+          GITHUB_TOKEN: ${{ secrets.PAT }}
 
       - name: Set up JFrog
         uses: actions/setup-java@v1
