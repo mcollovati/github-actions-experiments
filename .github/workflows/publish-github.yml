@@ -45,7 +45,7 @@ jobs:
           gpg-passphrase: MAVEN_GPG_PASSPHRASE # env variable for GPG private key passphrase
 
       - name: Publish to JFrog
-        run: mvn -DskipTests verify deploy -DprjKey.distrib=jfrog
+        run: mvn -DskipTests verify deploy -ntp -DprjKey.distrib=jfrog
         env:
           JFROG_USERNAME: mcollovati@gmail.com
           JFROG_TOKEN: ${{ secrets.JFROG_TOKEN }}
