@@ -6,7 +6,7 @@
 
     <groupId>com.mcollovati.github.spikes</groupId>
     <artifactId>gh-actions</artifactId>
-    <version>1.0.5</version>
+    <version>1.0.6-SNAPSHOT</version>
 
     <name>gh-actions</name>
     <url>https://github.com/mcollovati/github-actions-experiments</url>
