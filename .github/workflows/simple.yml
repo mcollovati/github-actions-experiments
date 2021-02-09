@@ -26,6 +26,7 @@ jobs:
             ${{ runner.os }}-maven-
       - name: Test multiple run
         run: |
+          env | sort
           PRJ_VERSION=$(./mvnw -pl :vaadin-flow-sockjs help:evaluate -q -Dexpression='project.version' -DforceStdout)
           KIND=$( [[ "${PRJ_VERSION}" =~ "-SNAPSHOT"$ ]] && echo "snapshots" || echo "release" )
           echo "${PRJ_VERSION} ---> ${KIND}"
