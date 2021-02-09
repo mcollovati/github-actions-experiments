@@ -1,0 +1,24 @@
+# This is a basic workflow that is manually triggered
+
+name: Manual workflow
+
+# Controls when the action will run. Workflow runs when manually triggered using the UI
+# or API.
+on:
+  workflow_dispatch:
+    inputs:
+      name:
+        description: 'Kind of deploy'
+        default: 'release'
+        required: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Test multiple run
+        run: |
+          PRJ_VERSION=$(./mvnw -pl :vaadin-flow-sockjs help:evaluate -q -Dexpression='project.version' -DforceStdout)
+          KIND=$( [[ "${PRJ_VERSION}" =~ "-SNAPSHOT"$ ]] && echo "snapshots" || echo "release" )
+          echo "${PRJ_VERSION} ---> ${KIND}"
