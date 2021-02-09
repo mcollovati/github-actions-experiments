@@ -17,6 +17,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - uses: actions/checkout@v2
+      - uses: actions/cache@v1
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-maven-
       - name: Test multiple run
         run: |
           PRJ_VERSION=$(./mvnw -pl :vaadin-flow-sockjs help:evaluate -q -Dexpression='project.version' -DforceStdout)
