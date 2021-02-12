@@ -1,0 +1,34 @@
+# This is a basic workflow that is manually triggered
+
+name: Build last tag
+
+# Controls when the action will run. Workflow runs when manually triggered using the UI
+# or API.
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - run: git checkout $(git describe --abbrev=0 --tags)
+      - uses: actions/setup-java@v1
+        with: # running setup-java again overwrites the settings.xml
+          java-version: 1.8
+      - uses: actions/cache@v1
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-maven-
+      - name: Test multiple run
+        run: |
+          env | sort
+          PRJ_VERSION=$(./mvnw help:evaluate -q -Dexpression='project.version' -DforceStdout)
+          echo "${PRJ_VERSION}"
+          KIND=$( [[ "${PRJ_VERSION}" =~ "-SNAPSHOT"$ ]] && echo "snapshots" || echo "release" )
+          echo "${PRJ_VERSION} ---> ${KIND}"
