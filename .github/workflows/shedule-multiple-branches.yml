@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        branch: [ main, dev, test ]
+        branch: [ main, dev, test, "spikes/mytest" ]
 
     steps:
       - uses: actions/checkout@v2
