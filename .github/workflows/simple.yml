@@ -29,9 +29,7 @@ jobs:
             ${{ runner.os }}-maven-
       - name: Tets curl and jq
         run: |
-          ./test-script.sh ${VERS}
-        env:
-          VERS=${{ inputs.name }}
+          ./test-script.sh ${{ github.event.inputs.name }}
       - name: Test multiple run
         run: |
           env | sort
