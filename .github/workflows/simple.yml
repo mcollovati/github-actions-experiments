@@ -8,8 +8,8 @@ on:
   workflow_dispatch:
     inputs:
       name:
-        description: 'Kind of deploy'
-        default: 'release'
+        description: 'Version to test'
+        default: '99.99.100'
         required: false
 
 jobs:
@@ -29,7 +29,9 @@ jobs:
             ${{ runner.os }}-maven-
       - name: Tets curl and jq
         run: |
-          curl 'https://mcollovati.jfrog.io/artifactory/api/search/gavc?g=com.github.mcollovati.vertx&a=vaadin-flow-sockjs&c=vaadin-*&repos=vertx-vaadin-releases' | 1
+          ./test-script.sh ${VERS}
+        env:
+          VERS=${{ inputs.name }}
       - name: Test multiple run
         run: |
           env | sort
